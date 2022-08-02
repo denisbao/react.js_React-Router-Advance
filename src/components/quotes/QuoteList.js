@@ -22,8 +22,15 @@ const QuoteList = props => {
   const isSortingAsc = queryParams.get('sort') === 'asc'
   const sortedQuotes = sortQuotes(props.quotes, isSortingAsc)
 
+  const currentPath = location.pathname
+  const urlSortQuery = `?sort=${isSortingAsc ? 'desc' : 'asc'}`
+
   function changeSortingHandler() {
-    history.push('/quotes?sort=' + (isSortingAsc ? 'desc' : 'asc'))
+    history.push({
+      pathname: currentPath,
+      search: urlSortQuery,
+    })
+    // The same can be done as: history.push(`${currentPath}${urlSortQuery}`)
   }
 
   return (
